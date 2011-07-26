@@ -185,29 +185,30 @@ public class mod_NWater extends Mod
         idBlock27 = propReader.prop(PropertyReader.ARGU_NULL,new int[0],"Water_Compressed_BlockID", "229");
 		 */
 		texx = new int[23];
-		texx[0] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pipe.png"),0);
-		texx[1] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pipegrate.png"),0);
-		texx[2] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pump.png"),0);
-		texx[3] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pump_on.png"),0);
-		texx[4] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pipe_off.png"),0);
-		texx[5] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/nwater.png"),0);
-		texx[6] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/nlava.png"),0);
-		texx[7] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/iron_h1.png"),0);
-		texx[8] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/iron_h2.png"),0);
-		texx[9] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/sensor_off.png"),0);
-		texx[10] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/sensor_on.png"),0);
-		texx[11] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/grate_off.png"),0);
-		texx[12] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/grate_on.png"),0);
-		texx[13] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/newmoss.png"),0);
-		texx[14] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/newmossstone.png"),0);
-		texx[15] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/sponge_1.png"),0);
-		texx[16] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/sponge_2.png"),0);
-		texx[17] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/noil.png"),0);
-		texx[18] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/nqsand.png"),0);
-		texx[19] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/wc_off.png"),0);
-		texx[20] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/wc_on.png"),0);
-		texx[21] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/ac_off.png"),0);
-		texx[22] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/ac_on.png"),0);
+		int txid=0;
+		texx[0] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pipe.png"),txid++);
+		texx[1] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pipegrate.png"),txid++);
+		texx[2] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pump.png"),txid++);
+		texx[3] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pump_on.png"),txid++);
+		texx[4] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/pipe_off.png"),txid++);
+		texx[5] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/nwater.png"),txid++);
+		texx[6] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/nlava.png"),txid++);
+		texx[7] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/iron_h1.png"),txid++);
+		texx[8] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/iron_h2.png"),txid++);
+		texx[9] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/sensor_off.png"),txid++);
+		texx[10] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/sensor_on.png"),txid++);
+		texx[11] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/grate_off.png"),txid++);
+		texx[12] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/grate_on.png"),txid++);
+		texx[13] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/newmoss.png"),txid++);
+		texx[14] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/newmossstone.png"),txid++);
+		texx[15] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/sponge_1.png"),txid++);
+		texx[16] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/sponge_2.png"),txid++);
+		texx[17] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/noil.png"),txid++);
+		texx[18] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/nqsand.png"),txid++);
+		texx[19] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/wc_off.png"),txid++);
+		texx[20] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/wc_on.png"),txid++);
+		texx[21] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/ac_off.png"),txid++);
+		texx[22] = api().registerItemIcon(this.imageName(this.getClass(), "gfx/ac_on.png"),txid++);
 
 		nwater 			= new BlockNWater		(api(), texx[5], Material.water);
 		nwater_still 	= new BlockNWater_Still	(api(), texx[5], Material.water);
@@ -232,25 +233,25 @@ public class mod_NWater extends Mod
 		bucketNWater = (new NWaterBucket(api(), nwater.blockID)).setIconCoord(11,4).setItemName("bucketNWater").setContainerItem(Item.bucketEmpty);
 		bucketNLava = (new NLavaBucket(api(), nlava.blockID)).setIconCoord(12,4).setItemName("bucketNLava").setContainerItem(Item.bucketEmpty);
 		bucketNOil = (new NOilBucket(api(), noil.blockID));
-		bucketNOil = bucketNOil.setIconIndex(api().registerItemIcon("gfx/itembucket_oil.png", bucketNOil.shiftedIndex)).setItemName("bucketNOil").setContainerItem(Item.bucketEmpty);
+		bucketNOil = bucketNOil.setIconIndex(api().registerItemIcon(this.imageName(this.getClass(), "gfx/itembucket_oil.png"), txid++)).setItemName("bucketNOil").setContainerItem(Item.bucketEmpty);
 		bucketNQSand = (new NSandBucket(api(), nqsand.blockID));
-		bucketNQSand=bucketNQSand.setIconIndex(api().registerItemIcon("gfx/itembucket_qsand.png",bucketNQSand.shiftedIndex)).setItemName("bucketNQSand").setContainerItem(Item.bucketEmpty);
+		bucketNQSand=bucketNQSand.setIconIndex(api().registerItemIcon(this.imageName(this.getClass(), "gfx/itembucket_qsand.png"),txid++)).setItemName("bucketNQSand").setContainerItem(Item.bucketEmpty);
 
 		Item.bucketEmpty = (new NItemBucket(Item.bucketEmpty.shiftedIndex,0)).setIconCoord(10, 4);
 
 		tankEmpty = (new ItemEmptyTank(api(), -1, 0, addArmor("tank"), 1)).setItemName("tankEmpty");
-		tankEmpty.setIconIndex(api().registerItemIcon("gfx/tank_empty.png",tankEmpty.shiftedIndex));
+		tankEmpty.setIconIndex(api().registerItemIcon(this.imageName(this.getClass(), "gfx/tank_empty.png"),txid++));
 		tankAir = (new ItemAirTank(api(), 0, 3, addArmor("tank"), 1)).setItemName("tankAir").setContainerItem(tankEmpty);
-		tankAir.setIconIndex(api().registerItemIcon("gfx/tank_air.png",tankAir.shiftedIndex));
+		tankAir.setIconIndex(api().registerItemIcon(this.imageName(this.getClass(), "gfx/tank_air.png"),txid++));
 		tankWater = (new ItemWaterTank(api(),nwater_pressure.blockID, 0, addArmor("tank"), 1)).setItemName("tankWater").setContainerItem(tankEmpty);
-		tankWater.setIconIndex(api().registerItemIcon("gfx/tank_water.png",tankWater.shiftedIndex));
+		tankWater.setIconIndex(api().registerItemIcon(this.imageName(this.getClass(), "gfx/tank_water.png"),txid++));
 		goggles = (new ItemGoggles(api(), 0, addArmor("tank"), 0)).setItemName("goggles");
-		goggles.setIconIndex(api().registerItemIcon("gfx/goggles.png",goggles.shiftedIndex));
+		goggles.setIconIndex(api().registerItemIcon(this.imageName(this.getClass(), "gfx/goggles.png"),txid++));
 
 		chickenCooked = (new ItemChickenBoiled(api(), 3, true));
-		chickenCooked=chickenCooked.setIconIndex(api().registerItemIcon("gfx/cookedchicken.png",chickenCooked.shiftedIndex)).setItemName("chickenCooked");
+		chickenCooked=chickenCooked.setIconIndex(api().registerItemIcon(this.imageName(this.getClass(), "gfx/cookedchicken.png"),txid++)).setItemName("chickenCooked");
 		beefCooked = (new ItemBeefBoiled(api(), 8, true));
-		beefCooked=beefCooked.setIconIndex(api().registerItemIcon("gfx/cookedbeef.png",beefCooked.shiftedIndex)).setItemName("beefCooked");
+		beefCooked=beefCooked.setIconIndex(api().registerItemIcon(this.imageName(this.getClass(), "gfx/cookedbeef.png"),txid++)).setItemName("beefCooked");
 
 		Item.itemsList[Block.sponge.blockID] = (new ItemSponge(Block.sponge.blockID - 256)).setItemName("sponge");
 

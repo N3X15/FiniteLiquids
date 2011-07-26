@@ -232,25 +232,25 @@ public class mod_NWater extends Mod
 		bucketNWater = (new NWaterBucket(api(), nwater.blockID)).setIconCoord(11,4).setItemName("bucketNWater").setContainerItem(Item.bucketEmpty);
 		bucketNLava = (new NLavaBucket(api(), nlava.blockID)).setIconCoord(12,4).setItemName("bucketNLava").setContainerItem(Item.bucketEmpty);
 		bucketNOil = (new NOilBucket(api(), noil.blockID));
-		bucketNOil = bucketNOil.setIconIndex(api().registerItemIcon("/imgz/itembucket_oil.png", bucketNOil.shiftedIndex)).setItemName("bucketNOil").setContainerItem(Item.bucketEmpty);
+		bucketNOil = bucketNOil.setIconIndex(api().registerItemIcon("gfx/itembucket_oil.png", bucketNOil.shiftedIndex)).setItemName("bucketNOil").setContainerItem(Item.bucketEmpty);
 		bucketNQSand = (new NSandBucket(api(), nqsand.blockID));
-		bucketNQSand=bucketNQSand.setIconIndex(api().registerItemIcon("/imgz/itembucket_qsand.png",bucketNQSand.shiftedIndex)).setItemName("bucketNQSand").setContainerItem(Item.bucketEmpty);
+		bucketNQSand=bucketNQSand.setIconIndex(api().registerItemIcon("gfx/itembucket_qsand.png",bucketNQSand.shiftedIndex)).setItemName("bucketNQSand").setContainerItem(Item.bucketEmpty);
 
 		Item.bucketEmpty = (new NItemBucket(Item.bucketEmpty.shiftedIndex,0)).setIconCoord(10, 4);
 
 		tankEmpty = (new ItemEmptyTank(api(), -1, 0, addArmor("tank"), 1)).setItemName("tankEmpty");
-		tankEmpty.setIconIndex(api().registerItemIcon("/imgz/tank_empty.png",tankEmpty.shiftedIndex));
+		tankEmpty.setIconIndex(api().registerItemIcon("gfx/tank_empty.png",tankEmpty.shiftedIndex));
 		tankAir = (new ItemAirTank(api(), 0, 3, addArmor("tank"), 1)).setItemName("tankAir").setContainerItem(tankEmpty);
-		tankAir.setIconIndex(api().registerItemIcon("/imgz/tank_air.png",tankAir.shiftedIndex));
+		tankAir.setIconIndex(api().registerItemIcon("gfx/tank_air.png",tankAir.shiftedIndex));
 		tankWater = (new ItemWaterTank(api(),nwater_pressure.blockID, 0, addArmor("tank"), 1)).setItemName("tankWater").setContainerItem(tankEmpty);
-		tankWater.setIconIndex(api().registerItemIcon("/imgz/tank_water.png",tankWater.shiftedIndex));
+		tankWater.setIconIndex(api().registerItemIcon("gfx/tank_water.png",tankWater.shiftedIndex));
 		goggles = (new ItemGoggles(api(), 0, addArmor("tank"), 0)).setItemName("goggles");
-		goggles.setIconIndex(api().registerItemIcon("/imgz/goggles.png",goggles.shiftedIndex));
+		goggles.setIconIndex(api().registerItemIcon("gfx/goggles.png",goggles.shiftedIndex));
 
 		chickenCooked = (new ItemChickenBoiled(api(), 3, true));
-		chickenCooked=chickenCooked.setIconIndex(api().registerItemIcon("/imgz/cookedchicken.png",chickenCooked.shiftedIndex)).setItemName("chickenCooked");
+		chickenCooked=chickenCooked.setIconIndex(api().registerItemIcon("gfx/cookedchicken.png",chickenCooked.shiftedIndex)).setItemName("chickenCooked");
 		beefCooked = (new ItemBeefBoiled(api(), 8, true));
-		beefCooked=beefCooked.setIconIndex(api().registerItemIcon("/imgz/cookedbeef.png",beefCooked.shiftedIndex)).setItemName("beefCooked");
+		beefCooked=beefCooked.setIconIndex(api().registerItemIcon("gfx/cookedbeef.png",beefCooked.shiftedIndex)).setItemName("beefCooked");
 
 		Item.itemsList[Block.sponge.blockID] = (new ItemSponge(Block.sponge.blockID - 256)).setItemName("sponge");
 

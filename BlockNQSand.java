@@ -8,6 +8,7 @@ import java.util.Random;
 
 import MCP.ApiController;
 import MCP.api.BlockBase;
+import MCP.mod_finiteliquids.BlockNLava;
 import net.minecraft.src.*;
 
 // Referenced classes of package net.minecraft.src:
@@ -19,7 +20,7 @@ public class BlockNQSand extends BlockNWater
 
     protected BlockNQSand(ApiController api, int j, Material material)
     {
-        super(api, j, material);
+		super(api,api.getBlockID(BlockNQSand.class), j, material);
         blockIndexInTexture = mod_NWater.texx[18];
         setHardness(100F);
         setLightOpacity(255);

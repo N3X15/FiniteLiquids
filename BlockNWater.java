@@ -29,7 +29,11 @@ import MCP.api.CustomRenderedBlockBase;
 public class BlockNWater extends CustomRenderedBlockBase {
 
 	protected BlockNWater(ApiController api, int textureID, Material material) {
-		super(api, api.getBlockID(BlockNWater.class), textureID, material);
+		this(api, api.getBlockID(BlockNWater.class), textureID, material);
+	}
+
+	public BlockNWater(ApiController api,int blockID, int j, Material material) {
+		super(api,blockID,j,material);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0725F, 1.0F);
 		setTickOnLoad(true);
 		blockResistance = 100F;

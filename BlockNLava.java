@@ -19,7 +19,7 @@ import MCP.ApiController;
 public class BlockNLava extends BlockNWater {
 
 	protected BlockNLava(ApiController api, int j, Material material) {
-		super(api, j, material);
+		super(api,api.getBlockID(BlockNLava.class), j, material);
 		blockIndexInTexture = Block.lavaStill.blockIndexInTexture;
 		setHardness(0.0F);
 		setLightValue(1.0F);

@@ -20,7 +20,7 @@ public class BlockNOil extends BlockNWater
 
     protected BlockNOil(ApiController api, int j, Material material)
     {
-        super(api, j, material);
+		super(api,api.getBlockID(BlockNOil.class), j, material);
         blockIndexInTexture = mod_NWater.texx[17];
         setLightOpacity(15);
         setHardness(100F);

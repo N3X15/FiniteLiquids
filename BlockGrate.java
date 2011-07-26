@@ -27,6 +27,7 @@ public class BlockGrate extends BlockBase
         setBlockName("grate");
     }
 
+    @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         int i1 = iblockaccess.getBlockMetadata(i, j, k);
@@ -39,17 +40,20 @@ public class BlockGrate extends BlockBase
         }
     }
 
+    @Override
     public int getBlockTextureFromSide(int i)
     {
         blockIndexInTexture = mod_NWater.texx[11];
         return mod_NWater.texx[11];
     }
 
+    @Override
     public int tickRate()
     {
         return 5;
     }
 
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         if(l > 0 && Block.blocksList[l].canProvidePower())
@@ -131,6 +135,7 @@ public class BlockGrate extends BlockBase
         }
     }
 
+    @Override
     public void updateTick(World world, int i, int j, int k, Random random)
     {
         int l = world.getBlockMetadata(i, j, k);
@@ -149,6 +154,7 @@ public class BlockGrate extends BlockBase
         }
     }
 
+    @Override
     public boolean isOpaqueCube()
     {
         return false;

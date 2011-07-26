@@ -30,7 +30,8 @@ public class BlockLiquidSensor extends BlockBase {
 		setBlockName("liquidsensor");
 	}
 
-	public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		int i1 = iblockaccess.getBlockMetadata(i, j, k);
 		if (i1 == 1) {
@@ -40,36 +41,44 @@ public class BlockLiquidSensor extends BlockBase {
 		}
 	}
 
-	public int getBlockTextureFromSide(int i) {
+	@Override
+    public int getBlockTextureFromSide(int i) {
 		blockIndexInTexture = mod_NWater.texx[10];
 		return mod_NWater.texx[10];
 	}
 
-	public int tickRate() {
+	@Override
+    public int tickRate() {
 		return 20;
 	}
 
-	public boolean renderAsNormalBlock() {
+	@Override
+    public boolean renderAsNormalBlock() {
 		return false;
 	}
 
-	public boolean isOpaqueCube() {
+	@Override
+    public boolean isOpaqueCube() {
 		return false;
 	}
 
-	public boolean canPlaceBlockAt(World world, int i, int j, int k) {
+	@Override
+    public boolean canPlaceBlockAt(World world, int i, int j, int k) {
 		return true;
 	}
 
-	public void onBlockAdded(World world, int i, int j, int k) {
+	@Override
+    public void onBlockAdded(World world, int i, int j, int k) {
 		setStateIfMobInteractsWithPlate(world, i, j, k);
 	}
 
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+	@Override
+    public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
 		setStateIfMobInteractsWithPlate(world, i, j, k);
 	}
 
-	public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+    public void updateTick(World world, int i, int j, int k, Random random) {
 		if (world.multiplayerWorld) {
 			return;
 		}
@@ -115,8 +124,8 @@ public class BlockLiquidSensor extends BlockBase {
 			world.notifyBlocksOfNeighborChange(i, j - 1, k - 1, blockID);
 			world.notifyBlocksOfNeighborChange(i, j - 1, k + 1, blockID);
 			world.markBlocksDirty(i, j, k, i, j, k);
-			world.playSoundEffect((double) i + 0.5D,
-					(double) j + 0.10000000000000001D, (double) k + 0.5D,
+			world.playSoundEffect(i + 0.5D,
+					j + 0.10000000000000001D, k + 0.5D,
 					"random.click", 0.3F, 0.6F);
 		}
 		if (!flag1 && flag) {
@@ -129,8 +138,8 @@ public class BlockLiquidSensor extends BlockBase {
 			world.notifyBlocksOfNeighborChange(i, j - 1, k - 1, blockID);
 			world.notifyBlocksOfNeighborChange(i, j - 1, k + 1, blockID);
 			world.markBlocksDirty(i, j, k, i, j, k);
-			world.playSoundEffect((double) i + 0.5D,
-					(double) j + 0.10000000000000001D, (double) k + 0.5D,
+			world.playSoundEffect(i + 0.5D,
+					j + 0.10000000000000001D, k + 0.5D,
 					"random.click", 0.3F, 0.5F);
 		}
 		if (flag1) {
@@ -138,7 +147,8 @@ public class BlockLiquidSensor extends BlockBase {
 		}
 	}
 
-	public void onBlockRemoval(World world, int i, int j, int k) {
+	@Override
+    public void onBlockRemoval(World world, int i, int j, int k) {
 		int l = world.getBlockMetadata(i, j, k);
 		if (l > 0) {
 			world.notifyBlocksOfNeighborChange(i, j, k, blockID);
@@ -148,17 +158,20 @@ public class BlockLiquidSensor extends BlockBase {
 		super.onBlockRemoval(world, i, j, k);
 	}
 
-	public boolean isPoweringTo(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public boolean isPoweringTo(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		return iblockaccess.getBlockMetadata(i, j, k) > 0;
 	}
 
-	public boolean isIndirectlyPoweringTo(World world, int i, int j, int k,
+	@Override
+    public boolean isIndirectlyPoweringTo(World world, int i, int j, int k,
 			int l) {
 		return world.getBlockMetadata(i, j, k) != 0;
 	}
 
-	public boolean canProvidePower() {
+	@Override
+    public boolean canProvidePower() {
 		return true;
 	}
 }

@@ -1,7 +1,6 @@
 package MCP.mod_finiteliquids;
 
 import MCP.ApiController;
-import net.minecraft.src.Item;
 import net.minecraft.src.ItemFood;
 
 public class ItemChickenBoiled extends ItemFood {

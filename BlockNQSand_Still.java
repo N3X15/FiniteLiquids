@@ -27,11 +27,13 @@ public class BlockNQSand_Still extends BlockNWater_Still
 		setBlockName("nqsand");
     }
 
+    @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return mod_NWater.texx[18];
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
         super.onEntityCollidedWithBlock(world, i, j, k, entity);
@@ -56,25 +58,30 @@ public class BlockNQSand_Still extends BlockNWater_Still
 		return ((NEntityLiving)entityliving).getJumping();
 	}
 
-	public int getBlockTextureFromSide(int i)
+	@Override
+    public int getBlockTextureFromSide(int i)
     {
         return mod_NWater.texx[18];
     }
 
+    @Override
     public void randomDisplayTick(World world, int i, int j, int k, Random random)
     {
     }
 
+    @Override
     public float getSurfaceMull()
     {
         return 1.0F;
     }
 
+    @Override
     public void updateTick(World world, int i, int j, int k, Random random)
     {
         super.updateTick(world, i, j, k, random);
     }
 
+    @Override
     public int getMoving()
     {
         return mod_NWater.nqsand.blockID;

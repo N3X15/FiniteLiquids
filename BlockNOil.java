@@ -28,40 +28,48 @@ public class BlockNOil extends BlockNWater
         setBlockName("noil");
     }
 
+    @Override
     public void updateTick(World world, int i, int j, int k, Random random)
     {
         super.updateTick(world, i, j, k, random);
     }
 
+    @Override
     public int tickRate()
     {
         return 6;
     }
 
+    @Override
     public int getThreshold()
     {
         return 2;
     }
 
+    @Override
     public int getMetathresh()
     {
         return 0;
     }
 
+    @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return mod_NWater.texx[17];
     }
     
+    @Override
     public float getSurfaceMull()
     {
         return 1.0F;
     }
 
+    @Override
     public void setToStill(World world, int i, int j, int k)
     {
     }
 
+    @Override
     public int getStill()
     {
         return mod_NWater.noil_still.blockID;

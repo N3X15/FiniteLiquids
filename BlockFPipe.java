@@ -31,16 +31,19 @@ public class BlockFPipe extends BlockBase
         setBlockName("pipe");
     }
 
+    @Override
     public int getRenderType()
     {
         return mod_NWater.id;
     }
 
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
@@ -117,6 +120,7 @@ public class BlockFPipe extends BlockBase
         }
     }
 
+    @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         int i1 = iblockaccess.getBlockMetadata(i, j, k);
@@ -133,16 +137,19 @@ public class BlockFPipe extends BlockBase
         }
     }
 
+    @Override
     public int getBlockTextureFromSide(int i)
     {
         return mod_NWater.texx[0];
     }
 
+    @Override
     public void onBlockAdded(World world, int i, int j, int k)
     {
         endOrTube(world, i, j, k);
     }
 
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         if(world.getBlockId(i + 1, j, k) == mod_NWater.pump.blockID)
@@ -189,6 +196,7 @@ public class BlockFPipe extends BlockBase
         endOrTube(world, i, j, k);
     }
 
+    @Override
     public void updateTick(World world, int i, int j, int k, Random random)
     {
     }

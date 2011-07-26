@@ -42,7 +42,8 @@ public class BlockNWater extends CustomRenderedBlockBase {
 		setBlockName("nwater");
 	}
 
-	public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		return mod_NWater.texx[5];
 	}
@@ -51,44 +52,54 @@ public class BlockNWater extends CustomRenderedBlockBase {
 		return true;
 	}
 
-	public int tickRate() {
+	@Override
+    public int tickRate() {
 		return 6;
 	}
 
-	public boolean canCollideCheck(int i, boolean flag) {
+	@Override
+    public boolean canCollideCheck(int i, boolean flag) {
 		return (i > 4) & flag;
 	}
 
-	public int idDropped(int i, Random random) {
+	@Override
+    public int idDropped(int i, Random random) {
 		return 0;
 	}
 
-	public void velocityToAddToEntity(World world, int i, int j, int k,
+	@Override
+    public void velocityToAddToEntity(World world, int i, int j, int k,
 			Entity entity, Vec3D vec3d) {
 		mod_NWater.waterPush(world, i, j, k, entity, vec3d);
 	}
 
-	public int quantityDropped(Random random) {
+	@Override
+    public int quantityDropped(Random random) {
 		return 0;
 	}
 
-	public boolean isOpaqueCube() {
+	@Override
+    public boolean isOpaqueCube() {
 		return false;
 	}
 
-	public boolean renderAsNormalBlock() {
+	@Override
+    public boolean renderAsNormalBlock() {
 		return false;
 	}
 
-	public boolean canPlaceBlockAt(World world, int i, int j, int k) {
+	@Override
+    public boolean canPlaceBlockAt(World world, int i, int j, int k) {
 		return true;
 	}
 
-	public void onBlockAdded(World world, int i, int j, int k) {
+	@Override
+    public void onBlockAdded(World world, int i, int j, int k) {
 		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
 	}
 
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+	@Override
+    public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
 	}
 
 	public boolean isWater(World world, int i, int j, int k) {
@@ -384,9 +395,9 @@ public class BlockNWater extends CustomRenderedBlockBase {
 		}
 		List<Entity> list = null;
 		list = world.getEntitiesWithinAABB(net.minecraft.src.EntityItem.class,
-				AxisAlignedBB.getBoundingBoxFromPool((float) i - 1.2F,
-						(float) j - 1.2F, (float) k - 1.2F, (float) i + 2.2F,
-						(float) j + 2.2F, (float) k + 2.2F));
+				AxisAlignedBB.getBoundingBoxFromPool(i - 1.2F,
+						j - 1.2F, k - 1.2F, i + 2.2F,
+						j + 2.2F, k + 2.2F));
 		if (list.size() > 0) {
 			int i1 = world.getBlockMetadata(i, j, k);
 			boolean flag = (world.getBlockId(i, j - 1, k) == Block.blockSteel.blockID)
@@ -528,7 +539,8 @@ public class BlockNWater extends CustomRenderedBlockBase {
 		return 1.0F;
 	}
 
-	public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+    public void updateTick(World world, int i, int j, int k, Random random) {
 		if (world.multiplayerWorld) {
 			return;
 		}
@@ -773,7 +785,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 					float f = getSurfaceMull();
 					if (!((!flag) & (Math
 							.pow(mod_NWater.getMetaAvg2(world, i + k3, j, k
-									+ i4), f) < (double) mod_NWater
+									+ i4), f) < mod_NWater
 							.getMetaAvg2(world, i, j, k)))) {
 						continue;
 					}
@@ -797,7 +809,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 
 		}
 		if (borderOcean(world, i, j, k)) {
-			l = (int) ((float) l * 1.25F) + 2;
+			l = (int) (l * 1.25F) + 2;
 			if (l > 15) {
 				l = 15;
 			}
@@ -826,7 +838,8 @@ public class BlockNWater extends CustomRenderedBlockBase {
 		return mod_NWater.nwater_still.blockID;
 	}
 
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i,
+	@Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i,
 			int j, int k) {
 		if (world.multiplayerWorld) {
 			return null;
@@ -893,29 +906,31 @@ public class BlockNWater extends CustomRenderedBlockBase {
 	}
 
 	protected void hardenFX(World world, int i, int j, int k) {
-		world.playSoundEffect((float) i + 0.5F, (float) j + 0.5F,
-				(float) k + 0.5F, "random.fizz", 0.5F,
+		world.playSoundEffect(i + 0.5F, j + 0.5F,
+				k + 0.5F, "random.fizz", 0.5F,
 				2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 		for (int l = 0; l < 8; l++) {
-			world.spawnParticle("largesmoke", (double) i + Math.random(),
-					(double) j + 1.2D, (double) k + Math.random(), 0.0D, 0.0D,
+			world.spawnParticle("largesmoke", i + Math.random(),
+					j + 1.2D, k + Math.random(), 0.0D, 0.0D,
 					0.0D);
 		}
 
 	}
 
-	public void randomDisplayTick(World world, int i, int j, int k,
+	@Override
+    public void randomDisplayTick(World world, int i, int j, int k,
 			Random random) {
 		if (random.nextInt(4) == 1 && mod_NWater.isBoiling(world, i, j, k)) {
-			world.spawnParticle("bubble", (float) i + random.nextFloat(),
-					(float) j + random.nextFloat(),
-					(float) k + random.nextFloat(),
+			world.spawnParticle("bubble", i + random.nextFloat(),
+					j + random.nextFloat(),
+					k + random.nextFloat(),
 					(random.nextFloat() - 0.5F) / 10F, random.nextFloat() / 5F,
 					(random.nextFloat() - 0.5F) / 10F);
 		}
 	}
 
-	public void onEntityCollidedWithBlock(World world, int i, int j, int k,
+	@Override
+    public void onEntityCollidedWithBlock(World world, int i, int j, int k,
 			Entity entity) {
 		if (world.multiplayerWorld) {
 			return;
@@ -925,7 +940,8 @@ public class BlockNWater extends CustomRenderedBlockBase {
 		}
 	}
 
-	public void onBlockRemoval(World world, int i, int j, int k) {
+	@Override
+    public void onBlockRemoval(World world, int i, int j, int k) {
 		int l = world.getBlockMetadata(i, j, k);
 		if (l > 0) {
 			world.notifyBlocksOfNeighborChange(i, j, k, blockID);
@@ -934,39 +950,46 @@ public class BlockNWater extends CustomRenderedBlockBase {
 		super.onBlockRemoval(world, i, j, k);
 	}
 
-	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i,
+	@Override
+    public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i,
 			int j, int k) {
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F,
-				0.01F + (float) iblockaccess.getBlockMetadata(i, j, k) / 16F,
+				0.01F + iblockaccess.getBlockMetadata(i, j, k) / 16F,
 				1.0F);
 	}
 
-	public boolean isPoweringTo(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public boolean isPoweringTo(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		return false;
 	}
 
-	public boolean isIndirectlyPoweringTo(World world, int i, int j, int k,
+	@Override
+    public boolean isIndirectlyPoweringTo(World world, int i, int j, int k,
 			int l) {
 		return false;
 	}
 
-	public boolean canProvidePower() {
+	@Override
+    public boolean canProvidePower() {
 		return false;
 	}
 
-	public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j,
+	@Override
+    public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j,
 			int k) {
 		float f = iblockaccess.getLightBrightness(i, j, k);
 		float f1 = iblockaccess.getLightBrightness(i, j + 1, k);
 		return f > f1 ? f : f1;
 	}
 
-	public int getRenderBlockPass() {
+	@Override
+    public int getRenderBlockPass() {
 		return 1;
 	}
 
-	public void setBlockBoundsForItemRender() {
+	@Override
+    public void setBlockBoundsForItemRender() {
 		float f = 0.5F;
 		float f1 = 0.125F;
 		float f2 = 0.5F;
@@ -1077,7 +1100,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i + 1, j, k)) {
 				j1++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i + 1, j, k)
+				f = f + myBlockAccess.getBlockMetadata(i + 1, j, k)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i + 1, j + 1, k)) {
@@ -1091,7 +1114,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i + 1, j, k + 1)) {
 				j1++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i + 1, j, k + 1)
+				f = f + myBlockAccess.getBlockMetadata(i + 1, j, k + 1)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i + 1, j + 1, k + 1)) {
@@ -1102,7 +1125,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i, j, k + 1)) {
 				j1++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i, j, k + 1)
+				f = f + myBlockAccess.getBlockMetadata(i, j, k + 1)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i, j + 1, k + 1)) {
@@ -1111,7 +1134,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			if (isLDWater(myBlockAccess, i, j, k + 1)) {
 				return 0.0F;
 			} else {
-				return f / 16F / (float) j1;
+				return f / 16F / j1;
 			}
 		}
 		if ((l == -1) & (i1 == -1)) {
@@ -1121,7 +1144,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i - 1, j, k)) {
 				k1++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i - 1, j, k)
+				f = f + myBlockAccess.getBlockMetadata(i - 1, j, k)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i - 1, j + 1, k)) {
@@ -1135,7 +1158,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i - 1, j, k - 1)) {
 				k1++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i - 1, j, k - 1)
+				f = f + myBlockAccess.getBlockMetadata(i - 1, j, k - 1)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i - 1, j + 1, k - 1)) {
@@ -1146,7 +1169,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i, j, k - 1)) {
 				k1++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i, j, k - 1)
+				f = f + myBlockAccess.getBlockMetadata(i, j, k - 1)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i, j + 1, k - 1)) {
@@ -1155,7 +1178,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			if (isLDWater(myBlockAccess, i, j, k - 1)) {
 				return 0.0F;
 			} else {
-				return f / 16F / (float) k1;
+				return f / 16F / k1;
 			}
 		}
 		if ((l == 1) & (i1 == -1)) {
@@ -1165,7 +1188,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i + 1, j, k)) {
 				l1++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i + 1, j, k)
+				f = f + myBlockAccess.getBlockMetadata(i + 1, j, k)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i + 1, j + 1, k)) {
@@ -1179,7 +1202,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i + 1, j, k - 1)) {
 				l1++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i + 1, j, k - 1)
+				f = f + myBlockAccess.getBlockMetadata(i + 1, j, k - 1)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i + 1, j + 1, k - 1)) {
@@ -1190,7 +1213,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i, j, k - 1)) {
 				l1++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i, j, k - 1)
+				f = f + myBlockAccess.getBlockMetadata(i, j, k - 1)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i, j + 1, k - 1)) {
@@ -1199,7 +1222,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			if (isLDWater(myBlockAccess, i, j, k - 1)) {
 				return 0.0F;
 			} else {
-				return f / 16F / (float) l1;
+				return f / 16F / l1;
 			}
 		}
 		if ((l == -1) & (i1 == 1)) {
@@ -1209,7 +1232,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i - 1, j, k)) {
 				i2++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i - 1, j, k)
+				f = f + myBlockAccess.getBlockMetadata(i - 1, j, k)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i - 1, j + 1, k)) {
@@ -1223,7 +1246,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i - 1, j, k + 1)) {
 				i2++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i - 1, j, k + 1)
+				f = f + myBlockAccess.getBlockMetadata(i - 1, j, k + 1)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i - 1, j + 1, k + 1)) {
@@ -1234,7 +1257,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			}
 			if (isWater(myBlockAccess, i, j, k + 1)) {
 				i2++;
-				f = f + (float) myBlockAccess.getBlockMetadata(i, j, k + 1)
+				f = f + myBlockAccess.getBlockMetadata(i, j, k + 1)
 						+ 1.0F;
 			}
 			if (isFWater(myBlockAccess, i, j + 1, k + 1)) {
@@ -1243,7 +1266,7 @@ public class BlockNWater extends CustomRenderedBlockBase {
 			if (isLDWater(myBlockAccess, i, j, k + 1)) {
 				return 0.0F;
 			} else {
-				return f / 16F / (float) i2;
+				return f / 16F / i2;
 			}
 		} else {
 			return f / 16F;
@@ -1258,49 +1281,49 @@ public class BlockNWater extends CustomRenderedBlockBase {
 		tessellator.setColorOpaque_F(f, f, f);
 		int i1 = (l & 0xf) << 4;
 		int j1 = l & 0xf0;
-		double d = (float) i1 / 256F;
-		double d1 = ((float) i1 + 15.99F) / 256F;
-		double d2 = (float) j1 / 256F;
-		double d3 = ((float) j1 + 15.99F) / 256F;
+		double d = i1 / 256F;
+		double d1 = (i1 + 15.99F) / 256F;
+		double d2 = j1 / 256F;
+		double d3 = (j1 + 15.99F) / 256F;
 		int k1 = myBlockAccess.getBlockMetadata(i, j, k);
 		if (myBlockAccess.getBlockId(i, j, k) == mod_NWater.nwater_ocean.blockID) {
 			k1 = 15;
 		}
 		float f2 = 0.0F;
 		if (canDrawWater2(myBlockAccess, i, j + 1, k)) {
-			tessellator.addVertexWithUV((float) i + 1.0F, (float) j
-					+ getHeight(myBlockAccess, i, j, k, 1, 1), (float) (k + 1),
+			tessellator.addVertexWithUV(i + 1.0F, j
+					+ getHeight(myBlockAccess, i, j, k, 1, 1), (k + 1),
 					d, d2);
-			tessellator.addVertexWithUV((float) i + 1.0F, (float) j
+			tessellator.addVertexWithUV(i + 1.0F, j
 					+ getHeight(myBlockAccess, i, j, k, 1, -1),
-					(float) (k + 0), d, d3);
-			tessellator.addVertexWithUV((float) i + 0.0F, (float) j
+					(k + 0), d, d3);
+			tessellator.addVertexWithUV(i + 0.0F, j
 					+ getHeight(myBlockAccess, i, j, k, -1, -1),
-					(float) (k + 0), d1, d3);
-			tessellator.addVertexWithUV((float) i + 0.0F, (float) j
+					(k + 0), d1, d3);
+			tessellator.addVertexWithUV(i + 0.0F, j
 					+ getHeight(myBlockAccess, i, j, k, -1, 1),
-					(float) (k + 1), d1, d2);
+					(k + 1), d1, d2);
 		}
 		if (canDrawWater(myBlockAccess, i, j - 1, k)) {
-			tessellator.addVertexWithUV((float) i + 1.0F, (float) j,
-					(float) (k + 1), d, d2);
-			tessellator.addVertexWithUV((float) i + 1.0F, (float) j,
-					(float) (k + 0), d, d3);
-			tessellator.addVertexWithUV((float) i + 0.0F, (float) j,
-					(float) (k + 0), d1, d3);
-			tessellator.addVertexWithUV((float) i + 0.0F, (float) j,
-					(float) (k + 1), d1, d2);
+			tessellator.addVertexWithUV(i + 1.0F, j,
+					(k + 1), d, d2);
+			tessellator.addVertexWithUV(i + 1.0F, j,
+					(k + 0), d, d3);
+			tessellator.addVertexWithUV(i + 0.0F, j,
+					(k + 0), d1, d3);
+			tessellator.addVertexWithUV(i + 0.0F, j,
+					(k + 1), d1, d2);
 		}
 		if (canDrawWater(myBlockAccess, i - 1, j, k)) {
-			tessellator.addVertexWithUV((float) i,
-					(float) j + getHeight(myBlockAccess, i, j, k, -1, 1) + f2,
-					(float) (k + 1), d, d2);
-			tessellator.addVertexWithUV((float) i, (float) (j + 0) - f2,
-					(float) (k + 1), d, d3);
-			tessellator.addVertexWithUV((float) i, (float) (j + 0) - f2,
-					(float) (k + 0), d1, d3);
-			tessellator.addVertexWithUV((float) i,
-					(float) j + getHeight(myBlockAccess, i, j, k, -1, -1) + f2,
+			tessellator.addVertexWithUV(i,
+					j + getHeight(myBlockAccess, i, j, k, -1, 1) + f2,
+					(k + 1), d, d2);
+			tessellator.addVertexWithUV(i, (j + 0) - f2,
+					(k + 1), d, d3);
+			tessellator.addVertexWithUV(i, (j + 0) - f2,
+					(k + 0), d1, d3);
+			tessellator.addVertexWithUV(i,
+					j + getHeight(myBlockAccess, i, j, k, -1, -1) + f2,
 					(float) (k + 0), d1, d2);
 		}
 		if (canDrawWater(myBlockAccess, i + 1, j, k)) {

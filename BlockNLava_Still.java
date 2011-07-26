@@ -24,37 +24,43 @@ public class BlockNLava_Still extends BlockNWater_Still {
 		setBlockName("nlava");
 	}
 
-	public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		return mod_NWater.texx[6];
 	}
 
-	public int getBlockTextureFromSide(int i) {
+	@Override
+    public int getBlockTextureFromSide(int i) {
 		return mod_NWater.texx[6];
 	}
 
-	public void randomDisplayTick(World world, int i, int j, int k,
+	@Override
+    public void randomDisplayTick(World world, int i, int j, int k,
 			Random random) {
 		if (blockMaterial == Material.lava
 				&& world.getBlockMaterial(i, j + 1, k) == Material.air
 				&& !world.isBlockOpaqueCube(i, j + 1, k)
 				&& random.nextInt(100) == 0) {
-			double d = (float) i + random.nextFloat();
-			double d1 = (double) j + maxY;
-			double d2 = (float) k + random.nextFloat();
+			double d = i + random.nextFloat();
+			double d1 = j + maxY;
+			double d2 = k + random.nextFloat();
 			world.spawnParticle("lava", d, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
-	public float getSurfaceMull() {
+	@Override
+    public float getSurfaceMull() {
 		return 1.8F;
 	}
 
-	public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+    public void updateTick(World world, int i, int j, int k, Random random) {
 		super.updateTick(world, i, j, k, random);
 	}
 
-	public int getMoving() {
+	@Override
+    public int getMoving() {
 		return mod_NWater.nlava.blockID;
 	}
 }

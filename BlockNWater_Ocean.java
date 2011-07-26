@@ -30,16 +30,19 @@ public class BlockNWater_Ocean extends BlockBase {
 		setBlockName("nwater_ocean");
 	}
 
-	public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		return mod_NWater.texx[5];
 	}
 
-	public int getBlockTextureFromSide(int i) {
+	@Override
+    public int getBlockTextureFromSide(int i) {
 		return mod_NWater.texx[5];
 	}
 
-	public int idDropped(int i, Random random) {
+	@Override
+    public int idDropped(int i, Random random) {
 		return 0;
 	}
 
@@ -47,34 +50,41 @@ public class BlockNWater_Ocean extends BlockBase {
 		return true;
 	}
 
-	public int quantityDropped(Random random) {
+	@Override
+    public int quantityDropped(Random random) {
 		return 0;
 	}
 
-	public boolean isOpaqueCube() {
+	@Override
+    public boolean isOpaqueCube() {
 		return false;
 	}
 
-	public boolean renderAsNormalBlock() {
+	@Override
+    public boolean renderAsNormalBlock() {
 		return false;
 	}
 
-	public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j,
+	@Override
+    public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j,
 			int k) {
 		float f = iblockaccess.getLightBrightness(i, j, k);
 		float f1 = iblockaccess.getLightBrightness(i, j + 1, k);
 		return f > f1 ? f : f1;
 	}
 
-	public int getRenderBlockPass() {
+	@Override
+    public int getRenderBlockPass() {
 		return 1;
 	}
 
-	public boolean canPlaceBlockAt(World world, int i, int j, int k) {
+	@Override
+    public boolean canPlaceBlockAt(World world, int i, int j, int k) {
 		return true;
 	}
 
-	public void onBlockAdded(World world, int i, int j, int k) {
+	@Override
+    public void onBlockAdded(World world, int i, int j, int k) {
 	}
 
 	public boolean isWater(World world, int i, int j, int k) {
@@ -93,11 +103,13 @@ public class BlockNWater_Ocean extends BlockBase {
 		return world.getBlockId(i, j, k) == mod_NWater.nlava_still.blockID;
 	}
 
-	public boolean canCollideCheck(int i, boolean flag) {
+	@Override
+    public boolean canCollideCheck(int i, boolean flag) {
 		return flag;
 	}
 
-	public int getRenderType() {
+	@Override
+    public int getRenderType() {
 		return mod_NWater.id2;
 	}
 
@@ -130,11 +142,13 @@ public class BlockNWater_Ocean extends BlockBase {
 		return false;
 	}
 
-	public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+    public void updateTick(World world, int i, int j, int k, Random random) {
 		onNeighborBlockChange(world, i, j, k, 100);
 	}
 
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+	@Override
+    public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
 		boolean flag = false;
 		boolean flag1 = false;
 		if (Block.blocksList[l] == mod_NWater.nwater_ocean) {
@@ -212,7 +226,7 @@ public class BlockNWater_Ocean extends BlockBase {
 
 	public void setOcean(World world, int i, int j, int k, int l, int i1,
 			int j1, int k1, int l1) {
-		if ((double) k1 > (double) mod_NWater.lakeLimit * 1.5D) {
+		if (k1 > mod_NWater.lakeLimit * 1.5D) {
 			return;
 		}
 		boolean flag = false;
@@ -340,7 +354,8 @@ public class BlockNWater_Ocean extends BlockBase {
 		return world.getBlockId(i, j, k) == blockID;
 	}
 
-	public void onEntityCollidedWithBlock(World world, int i, int j, int k,
+	@Override
+    public void onEntityCollidedWithBlock(World world, int i, int j, int k,
 			Entity entity) {
 		if (world.multiplayerWorld) {
 			return;
@@ -352,7 +367,8 @@ public class BlockNWater_Ocean extends BlockBase {
 		}
 	}
 
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i,
+	@Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i,
 			int j, int k) {
 		if (world.multiplayerWorld) {
 			return null;
@@ -362,7 +378,8 @@ public class BlockNWater_Ocean extends BlockBase {
 		}
 	}
 
-	public void onBlockRemoval(World world, int i, int j, int k) {
+	@Override
+    public void onBlockRemoval(World world, int i, int j, int k) {
 		int l = world.getBlockMetadata(i, j, k);
 		if (l > 0) {
 			world.notifyBlocksOfNeighborChange(i, j, k, blockID);
@@ -371,26 +388,31 @@ public class BlockNWater_Ocean extends BlockBase {
 		super.onBlockRemoval(world, i, j, k);
 	}
 
-	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i,
+	@Override
+    public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i,
 			int j, int k) {
 		setBlockBounds(0.0F, -0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public boolean isPoweringTo(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public boolean isPoweringTo(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		return false;
 	}
 
-	public boolean isIndirectlyPoweringTo(World world, int i, int j, int k,
+	@Override
+    public boolean isIndirectlyPoweringTo(World world, int i, int j, int k,
 			int l) {
 		return false;
 	}
 
-	public boolean canProvidePower() {
+	@Override
+    public boolean canProvidePower() {
 		return false;
 	}
 
-	public void setBlockBoundsForItemRender() {
+	@Override
+    public void setBlockBoundsForItemRender() {
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 

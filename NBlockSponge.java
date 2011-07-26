@@ -25,11 +25,13 @@ public class NBlockSponge extends Block
         setBlockName("sponge");
     }
 
+    @Override
     public int tickRate()
     {
         return 200;
     }
 
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         if(world.getBlockMetadata(i, j, k) > 0)
@@ -38,6 +40,7 @@ public class NBlockSponge extends Block
         }
     }
 
+    @Override
     public void updateTick(World world, int i, int j, int k, Random random)
     {
         int l = world.getBlockMetadata(i, j, k);
@@ -73,6 +76,7 @@ public class NBlockSponge extends Block
         return world.getBlockId(i, j + 1, k) == mod_NWater.nwater_ocean.blockID;
     }
 
+    @Override
     public int getBlockTextureFromSideAndMetadata(int i, int j)
     {
         if(j > 14)
@@ -88,6 +92,7 @@ public class NBlockSponge extends Block
         }
     }
 
+    @Override
     protected int damageDropped(int i)
     {
         return i;
@@ -103,6 +108,7 @@ public class NBlockSponge extends Block
         return ~i & 0xf;
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
         if(world.multiplayerWorld)
@@ -114,6 +120,7 @@ public class NBlockSponge extends Block
         }
     }
 
+    @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
         int l = world.getBlockMetadata(i, j, k);

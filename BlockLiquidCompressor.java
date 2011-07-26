@@ -24,7 +24,8 @@ public class BlockLiquidCompressor extends BlockBase {
 		setBlockName("liquidcompressor");
 	}
 
-	public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		int i1 = iblockaccess.getBlockMetadata(i, j, k);
 		if (i1 == 7) {
@@ -40,20 +41,24 @@ public class BlockLiquidCompressor extends BlockBase {
 		}
 	}
 
-	public int getBlockTextureFromSide(int i) {
+	@Override
+    public int getBlockTextureFromSide(int i) {
 		blockIndexInTexture = mod_NWater.texx[19];
 		return mod_NWater.texx[19];
 	}
 
-	public boolean renderAsNormalBlock() {
+	@Override
+    public boolean renderAsNormalBlock() {
 		return false;
 	}
 
-	public boolean isOpaqueCube() {
+	@Override
+    public boolean isOpaqueCube() {
 		return false;
 	}
 
-	public boolean canPlaceBlockAt(World world, int i, int j, int k) {
+	@Override
+    public boolean canPlaceBlockAt(World world, int i, int j, int k) {
 		return true;
 	}
 }

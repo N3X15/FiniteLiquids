@@ -356,7 +356,7 @@ public class PropertyReader {
     public float prop(int arguType, float[] argu, String key, float def, String comment) {
         double[] argu1 = new double[argu.length];
         for(int i=0;i<argu.length;i++) {
-            argu1[i] = (double)argu[i];
+            argu1[i] = argu[i];
         }
         return (float)checkArgsNumeric(Double.valueOf(getProp(key, String.valueOf(def), comment)), arguType, argu1, key, def, comment);
     }
@@ -420,7 +420,7 @@ public class PropertyReader {
     public byte prop(int arguType, byte[] argu, String key, byte def, String comment) {
         double[] argu1 = new double[argu.length];
         for(int i=0;i<argu.length;i++) {
-            argu1[i] = (double)argu[i];
+            argu1[i] = argu[i];
         }
         return (byte)checkArgsNumeric(Double.valueOf(getProp(key, String.valueOf(def), comment)), arguType, argu1, key, def, comment);
     }
@@ -454,7 +454,7 @@ public class PropertyReader {
     public short prop(int arguType, short[] argu, String key, short def, String comment) {
         double[] argu1 = new double[argu.length];
         for(int i=0;i<argu.length;i++) {
-            argu1[i] = (double)argu[i];
+            argu1[i] = argu[i];
         }
         return (short)checkArgsNumeric(Double.valueOf(getProp(key, String.valueOf(def), comment)), arguType, argu1, key, def, comment);
     }
@@ -488,7 +488,7 @@ public class PropertyReader {
     public int prop(int arguType, int[] argu, String key, int def, String comment) {
         double[] argu1 = new double[argu.length];
         for(int i=0;i<argu.length;i++) {
-            argu1[i] = (double)argu[i];
+            argu1[i] = argu[i];
         }
         return (int)checkArgsNumeric(Double.valueOf(getProp(key, String.valueOf(def), comment)), arguType, argu1, key, def, comment);
     }
@@ -522,7 +522,7 @@ public class PropertyReader {
     public long prop(int arguType, long[] argu, String key, long def, String comment) {
         double[] argu1 = new double[argu.length];
         for(int i=0;i<argu.length;i++) {
-            argu1[i] = (double)argu[i];
+            argu1[i] = argu[i];
         }
         return (long)checkArgsNumeric(Double.valueOf(getProp(key, String.valueOf(def), comment)), arguType, argu1, key, def, comment);
     }

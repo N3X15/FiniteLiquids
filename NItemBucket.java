@@ -6,8 +6,6 @@ package MCP.mod_finiteliquids;
 
 import MCP.ApiController;
 
-import java.util.Random;
-
 import net.minecraft.src.*;
 
 //Referenced classes of package net.minecraft.src:
@@ -154,7 +152,8 @@ public class NItemBucket extends Item {
 		}
 	}
 
-	public ItemStack onItemRightClick(ItemStack itemstack, World world,
+	@Override
+    public ItemStack onItemRightClick(ItemStack itemstack, World world,
 			EntityPlayer entityplayer) {
 		float f = 1.0F;
 		float f1 = entityplayer.prevRotationPitch
@@ -163,12 +162,12 @@ public class NItemBucket extends Item {
 		float f2 = entityplayer.prevRotationYaw
 				+ (entityplayer.rotationYaw - entityplayer.prevRotationYaw) * f;
 		double d = entityplayer.prevPosX
-				+ (entityplayer.posX - entityplayer.prevPosX) * (double) f;
+				+ (entityplayer.posX - entityplayer.prevPosX) * f;
 		double d1 = (entityplayer.prevPosY
-				+ (entityplayer.posY - entityplayer.prevPosY) * (double) f + 1.6200000000000001D)
-				- (double) entityplayer.yOffset;
+				+ (entityplayer.posY - entityplayer.prevPosY) * f + 1.6200000000000001D)
+				- entityplayer.yOffset;
 		double d2 = entityplayer.prevPosZ
-				+ (entityplayer.posZ - entityplayer.prevPosZ) * (double) f;
+				+ (entityplayer.posZ - entityplayer.prevPosZ) * f;
 		Vec3D vec3d = Vec3D.createVector(d, d1, d2);
 		float f3 = MathHelper.cos(-f2 * 0.01745329F - 3.141593F);
 		float f4 = MathHelper.sin(-f2 * 0.01745329F - 3.141593F);
@@ -178,8 +177,8 @@ public class NItemBucket extends Item {
 		float f8 = f6;
 		float f9 = f3 * f5;
 		double d3 = 5D;
-		Vec3D vec3d1 = vec3d.addVector((double) f7 * d3, (double) f8 * d3,
-				(double) f9 * d3);
+		Vec3D vec3d1 = vec3d.addVector(f7 * d3, f8 * d3,
+				f9 * d3);
 		MovingObjectPosition movingobjectposition = world.rayTraceBlocks_do(
 				vec3d, vec3d1, isFull == 0);
 		if (movingobjectposition == null) {
@@ -257,9 +256,9 @@ public class NItemBucket extends Item {
 										.nextFloat()) * 0.8F);
 						for (int i1 = 0; i1 < 8; i1++) {
 							world.spawnParticle("largesmoke",
-									(double) i + Math.random(), (double) j
+									i + Math.random(), j
 											+ Math.random(),
-									(double) k + Math.random(), 0.0D, 0.0D,
+									k + Math.random(), 0.0D, 0.0D,
 									0.0D);
 						}
 

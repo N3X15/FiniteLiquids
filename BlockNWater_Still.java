@@ -34,26 +34,31 @@ public class BlockNWater_Still extends BlockBase
         setBlockName("nwater");
     }
 
+    @Override
     public int tickRate()
     {
         return 6000;
     }
 
+    @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return mod_NWater.texx[5];
     }
 
+    @Override
     public void velocityToAddToEntity(World world, int i, int j, int k, Entity entity, Vec3D vec3d)
     {
         mod_NWater.waterPush(world, i, j, k, entity, vec3d);
     }
 
+    @Override
     public int getBlockTextureFromSide(int i)
     {
         return mod_NWater.texx[5];
     }
 
+    @Override
     public int idDropped(int i, Random random)
     {
         return 0;
@@ -64,21 +69,25 @@ public class BlockNWater_Still extends BlockBase
         return true;
     }
 
+    @Override
     public int quantityDropped(Random random)
     {
         return 0;
     }
 
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
 
+    @Override
     public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j, int k)
     {
         float f = iblockaccess.getLightBrightness(i, j, k);
@@ -86,16 +95,19 @@ public class BlockNWater_Still extends BlockBase
         return f > f1 ? f : f1;
     }
 
+    @Override
     public int getRenderBlockPass()
     {
         return 1;
     }
 
+    @Override
     public boolean canPlaceBlockAt(World world, int i, int j, int k)
     {
         return true;
     }
 
+    @Override
     public void onBlockAdded(World world, int i, int j, int k)
     {
         if(world.getBlockMetadata(i, j, k) < 2)
@@ -104,6 +116,7 @@ public class BlockNWater_Still extends BlockBase
         }
     }
 
+    @Override
     public void updateTick(World world, int i, int j, int k, Random random)
     {
         if(world.getBlockMetadata(i, j, k) < 2)
@@ -118,11 +131,13 @@ public class BlockNWater_Still extends BlockBase
         }
     }
 
+    @Override
     public boolean canCollideCheck(int i, boolean flag)
     {
         return (i > 4) & flag;
     }
 
+    @Override
     public int getRenderType()
     {
         return mod_NWater.id2;
@@ -154,6 +169,7 @@ public class BlockNWater_Still extends BlockBase
         return (world.getBlockId(i, j, k) == mod_NWater.grate.blockID) & (world.getBlockMetadata(i, j, k) != 10);
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
         if(world.multiplayerWorld)
@@ -171,6 +187,7 @@ public class BlockNWater_Still extends BlockBase
         return 1.0F;
     }
 
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         if(!mod_NWater.chunkPass(world, i, j, k))
@@ -313,7 +330,7 @@ public class BlockNWater_Still extends BlockBase
                         flag = true;
                     }
                     float f = getSurfaceMull();
-                    if(!((!flag) & (Math.pow(mod_NWater.getMetaAvg2(world, i + l3, j, k + j4), f) < (double)mod_NWater.getMetaAvg2(world, i, j, k))))
+                    if(!((!flag) & (Math.pow(mod_NWater.getMetaAvg2(world, i + l3, j, k + j4), f) < mod_NWater.getMetaAvg2(world, i, j, k))))
                     {
                         continue;
                     }
@@ -339,6 +356,7 @@ public class BlockNWater_Still extends BlockBase
         return mod_NWater.nwater.blockID;
     }
 
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
     {
         if(world.multiplayerWorld)
@@ -393,11 +411,12 @@ public class BlockNWater_Still extends BlockBase
         }
     }
 
+    @Override
     public void randomDisplayTick(World world, int i, int j, int k, Random random)
     {
         if(random.nextInt(4) == 1 && mod_NWater.isBoiling(world, i, j, k))
         {
-            world.spawnParticle("bubble", (float)i + random.nextFloat(), (float)j + random.nextFloat(), (float)k + random.nextFloat(), (random.nextFloat() - 0.5F) / 10F, random.nextFloat() / 5F, (random.nextFloat() - 0.5F) / 10F);
+            world.spawnParticle("bubble", i + random.nextFloat(), j + random.nextFloat(), k + random.nextFloat(), (random.nextFloat() - 0.5F) / 10F, random.nextFloat() / 5F, (random.nextFloat() - 0.5F) / 10F);
         }
         if(blockMaterial == Material.water)
         {
@@ -405,6 +424,7 @@ public class BlockNWater_Still extends BlockBase
         }
     }
 
+    @Override
     public void onBlockRemoval(World world, int i, int j, int k)
     {
         int l = world.getBlockMetadata(i, j, k);
@@ -416,26 +436,31 @@ public class BlockNWater_Still extends BlockBase
         super.onBlockRemoval(world, i, j, k);
     }
 
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k)
     {
-        setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.01F + (float)iblockaccess.getBlockMetadata(i, j, k) / 16F, 1.0F);
+        setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.01F + iblockaccess.getBlockMetadata(i, j, k) / 16F, 1.0F);
     }
 
+    @Override
     public boolean isPoweringTo(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return false;
     }
 
+    @Override
     public boolean isIndirectlyPoweringTo(World world, int i, int j, int k, int l)
     {
         return false;
     }
 
+    @Override
     public boolean canProvidePower()
     {
         return false;
     }
 
+    @Override
     public void setBlockBoundsForItemRender()
     {
         float f = 0.5F;

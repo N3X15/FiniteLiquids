@@ -28,11 +28,13 @@ public class BlockMossy extends BlockBase {
 		setBlockName("ncstoneMoss");
 	}
 
-	public int tickRate() {
+	@Override
+    public int tickRate() {
 		return 15;
 	}
 
-	public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+    public void updateTick(World world, int i, int j, int k, Random random) {
 		if (world.getBlockMetadata(i, j, k) == 1) {
 			int l = 0;
 			if (mod_NWater.isWater(world, i, j + 1, k)) {
@@ -94,7 +96,8 @@ public class BlockMossy extends BlockBase {
 		}
 	}
 
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+	@Override
+    public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
 		int i1 = 0;
 		if (mod_NWater.isWater(world, i, j + 1, k)) {
 			i1 = 1;

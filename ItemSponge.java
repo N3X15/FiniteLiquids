@@ -4,8 +4,6 @@
 
 package MCP.mod_finiteliquids;
 
-import MCP.ApiController;
-import MCP.api.BlockBase;
 import net.minecraft.src.*;
 
 
@@ -22,11 +20,13 @@ public class ItemSponge extends ItemBlock
         setHasSubtypes(true);
     }
 
+    @Override
     public int getIconFromDamage(int i)
     {
         return Block.sponge.getBlockTextureFromSideAndMetadata(2, NBlockSponge.func_21034_c(i));
     }
 
+    @Override
     public int getPlacedBlockMetadata(int i)
     {
         return i;

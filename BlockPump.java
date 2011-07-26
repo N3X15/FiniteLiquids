@@ -25,11 +25,13 @@ public class BlockPump extends BlockBase {
 		setBlockName("pump");
 	}
 
-	public int getBlockTextureFromSide(int i) {
+	@Override
+    public int getBlockTextureFromSide(int i) {
 		return mod_NWater.texx[3];
 	}
 
-	public int tickRate() {
+	@Override
+    public int tickRate() {
 		return 5;
 	}
 
@@ -213,7 +215,8 @@ public class BlockPump extends BlockBase {
 		return -1;
 	}
 
-	public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+    public void updateTick(World world, int i, int j, int k, Random random) {
 		int l = world.getBlockMetadata(i, j, k);
 		if (l != 0)
 			;
@@ -233,7 +236,7 @@ public class BlockPump extends BlockBase {
 	}
 
 	public void resetPipe(World world, int i, int j, int k, int l) {
-		if ((double) l > (double) mod_NWater.pipeLimit * 1.25D) {
+		if (l > mod_NWater.pipeLimit * 1.25D) {
 			return;
 		}
 		if ((world.getBlockId(i, j, k) == mod_NWater.pipe.blockID)
@@ -366,7 +369,8 @@ public class BlockPump extends BlockBase {
 		}
 	}
 
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+	@Override
+    public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
 		if (l > 0 && Block.blocksList[l].canProvidePower()) {
 			if (Block.blocksList[l].blockID == mod_NWater.pipe.blockID) {
 				return;
@@ -385,12 +389,14 @@ public class BlockPump extends BlockBase {
 		}
 	}
 
-	public void onBlockAdded(World world, int i, int j, int k) {
+	@Override
+    public void onBlockAdded(World world, int i, int j, int k) {
 		super.onBlockAdded(world, i, j, k);
 		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
 	}
 
-	public boolean blockActivated(World world, int i, int j, int k,
+	@Override
+    public boolean blockActivated(World world, int i, int j, int k,
 			EntityPlayer entityplayer) {
 		int l = world.getBlockMetadata(i, j, k);
 		if (++l > 1) {
@@ -401,7 +407,8 @@ public class BlockPump extends BlockBase {
 		return !world.multiplayerWorld ? true : true;
 	}
 
-	public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		int i1 = iblockaccess.getBlockMetadata(i, j, k);
 		if (i1 == 1) {

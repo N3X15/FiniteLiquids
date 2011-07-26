@@ -27,36 +27,44 @@ public class BlockNLava extends BlockNWater {
 		setBlockName("nlava");
 	}
 
-	public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+    public void updateTick(World world, int i, int j, int k, Random random) {
 		super.updateTick(world, i, j, k, random);
 	}
 
-	public int tickRate() {
+	@Override
+    public int tickRate() {
 		return 8;
 	}
 
-	public int getThreshold() {
+	@Override
+    public int getThreshold() {
 		return 2;
 	}
 
-	public int getMetathresh() {
+	@Override
+    public int getMetathresh() {
 		return 3;
 	}
 
-	public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		return mod_NWater.texx[6];
 	}
 
-	public float getSurfaceMull() {
+	@Override
+    public float getSurfaceMull() {
 		return 1.3F;
 	}
 
-	public void setToStill(World world, int i, int j, int k) {
+	@Override
+    public void setToStill(World world, int i, int j, int k) {
 		burnArea(world, i, j, k);
 	}
 
-	public int getStill() {
+	@Override
+    public int getStill() {
 		return mod_NWater.nlava_still.blockID;
 	}
 }

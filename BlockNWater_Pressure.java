@@ -29,24 +29,29 @@ public class BlockNWater_Pressure extends BlockBase {
 		setBlockName("nwater_pressure");
 	}
 
-	public int tickRate() {
+	@Override
+    public int tickRate() {
 		return 10;
 	}
 
-	public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		return mod_NWater.texx[5];
 	}
 
-	public void velocityToAddToEntity(World world, int i, int j, int k,
+	@Override
+    public void velocityToAddToEntity(World world, int i, int j, int k,
 			Entity entity, Vec3D vec3d) {
 	}
 
-	public int getBlockTextureFromSide(int i) {
+	@Override
+    public int getBlockTextureFromSide(int i) {
 		return mod_NWater.texx[5];
 	}
 
-	public int idDropped(int i, Random random) {
+	@Override
+    public int idDropped(int i, Random random) {
 		return 0;
 	}
 
@@ -54,38 +59,46 @@ public class BlockNWater_Pressure extends BlockBase {
 		return true;
 	}
 
-	public int quantityDropped(Random random) {
+	@Override
+    public int quantityDropped(Random random) {
 		return 0;
 	}
 
-	public boolean isOpaqueCube() {
+	@Override
+    public boolean isOpaqueCube() {
 		return false;
 	}
 
-	public boolean renderAsNormalBlock() {
+	@Override
+    public boolean renderAsNormalBlock() {
 		return false;
 	}
 
-	public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j,
+	@Override
+    public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j,
 			int k) {
 		float f = iblockaccess.getLightBrightness(i, j, k);
 		float f1 = iblockaccess.getLightBrightness(i, j + 1, k);
 		return f > f1 ? f : f1;
 	}
 
-	public int getRenderBlockPass() {
+	@Override
+    public int getRenderBlockPass() {
 		return 1;
 	}
 
-	public boolean canPlaceBlockAt(World world, int i, int j, int k) {
+	@Override
+    public boolean canPlaceBlockAt(World world, int i, int j, int k) {
 		return true;
 	}
 
-	public void onBlockAdded(World world, int i, int j, int k) {
+	@Override
+    public void onBlockAdded(World world, int i, int j, int k) {
 		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
 	}
 
-	public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+    public void updateTick(World world, int i, int j, int k, Random random) {
 		if (world.getBlockMetadata(i, j, k) > 1) {
 			if (doMoveWater(world, i, j, k)) {
 				world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
@@ -175,7 +188,8 @@ public class BlockNWater_Pressure extends BlockBase {
 		return false;
 	}
 
-	public boolean canCollideCheck(int i, boolean flag) {
+	@Override
+    public boolean canCollideCheck(int i, boolean flag) {
 		return (i > 4) & flag;
 	}
 
@@ -201,7 +215,8 @@ public class BlockNWater_Pressure extends BlockBase {
 				& (world.getBlockMetadata(i, j, k) != 10);
 	}
 
-	public void onEntityCollidedWithBlock(World world, int i, int j, int k,
+	@Override
+    public void onEntityCollidedWithBlock(World world, int i, int j, int k,
 			Entity entity) {
 		if (world.multiplayerWorld) {
 			return;
@@ -211,7 +226,8 @@ public class BlockNWater_Pressure extends BlockBase {
 		}
 	}
 
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+	@Override
+    public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
 		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
 	}
 
@@ -223,7 +239,8 @@ public class BlockNWater_Pressure extends BlockBase {
 		return mod_NWater.nwater_still.blockID;
 	}
 
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i,
+	@Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i,
 			int j, int k) {
 		if (world.multiplayerWorld) {
 			return null;
@@ -234,12 +251,13 @@ public class BlockNWater_Pressure extends BlockBase {
 		return null;
 	}
 
-	public void randomDisplayTick(World world, int i, int j, int k,
+	@Override
+    public void randomDisplayTick(World world, int i, int j, int k,
 			Random random) {
 		if (random.nextInt(4) == 1 && mod_NWater.isBoiling(world, i, j, k)) {
-			world.spawnParticle("bubble", (float) i + random.nextFloat(),
-					(float) j + random.nextFloat(),
-					(float) k + random.nextFloat(),
+			world.spawnParticle("bubble", i + random.nextFloat(),
+					j + random.nextFloat(),
+					k + random.nextFloat(),
 					(random.nextFloat() - 0.5F) / 10F, random.nextFloat() / 5F,
 					(random.nextFloat() - 0.5F) / 10F);
 		}
@@ -249,7 +267,8 @@ public class BlockNWater_Pressure extends BlockBase {
 		}
 	}
 
-	public void onBlockRemoval(World world, int i, int j, int k) {
+	@Override
+    public void onBlockRemoval(World world, int i, int j, int k) {
 		int l = world.getBlockMetadata(i, j, k);
 		if (l > 0) {
 			world.notifyBlocksOfNeighborChange(i, j, k, blockID);
@@ -258,26 +277,31 @@ public class BlockNWater_Pressure extends BlockBase {
 		super.onBlockRemoval(world, i, j, k);
 	}
 
-	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i,
+	@Override
+    public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i,
 			int j, int k) {
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public boolean isPoweringTo(IBlockAccess iblockaccess, int i, int j, int k,
+	@Override
+    public boolean isPoweringTo(IBlockAccess iblockaccess, int i, int j, int k,
 			int l) {
 		return false;
 	}
 
-	public boolean isIndirectlyPoweringTo(World world, int i, int j, int k,
+	@Override
+    public boolean isIndirectlyPoweringTo(World world, int i, int j, int k,
 			int l) {
 		return false;
 	}
 
-	public boolean canProvidePower() {
+	@Override
+    public boolean canProvidePower() {
 		return false;
 	}
 
-	public void setBlockBoundsForItemRender() {
+	@Override
+    public void setBlockBoundsForItemRender() {
 		float f = 0.5F;
 		float f1 = 0.125F;
 		float f2 = 0.5F;

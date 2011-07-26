@@ -6,8 +6,6 @@ package MCP.mod_finiteliquids;
 
 import java.util.Random;
 
-import MCP.ApiController;
-import MCP.api.BlockBase;
 import net.minecraft.src.*;
 
 // Referenced classes of package net.minecraft.src:
@@ -22,6 +20,7 @@ public class WorldGenNLakes extends WorldGenerator
         field_15235_a = i;
     }
 
+    @Override
     public boolean generate(World world, Random random, int i, int j, int k)
     {
         i -= 8;
@@ -43,9 +42,9 @@ public class WorldGenNLakes extends WorldGenerator
                 {
                     for(int l4 = 1; l4 < 7; l4++)
                     {
-                        double d6 = ((double)j4 - d3) / (d / 2D);
-                        double d7 = ((double)l4 - d4) / (d1 / 2D);
-                        double d8 = ((double)k4 - d5) / (d2 / 2D);
+                        double d6 = (j4 - d3) / (d / 2D);
+                        double d7 = (l4 - d4) / (d1 / 2D);
+                        double d8 = (k4 - d5) / (d2 / 2D);
                         double d9 = d6 * d6 + d7 * d7 + d8 * d8;
                         if(d9 < 1.0D)
                         {

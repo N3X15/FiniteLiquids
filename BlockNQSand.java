@@ -7,8 +7,6 @@ package MCP.mod_finiteliquids;
 import java.util.Random;
 
 import MCP.ApiController;
-import MCP.api.BlockBase;
-import MCP.mod_finiteliquids.BlockNLava;
 import net.minecraft.src.*;
 
 // Referenced classes of package net.minecraft.src:
@@ -27,40 +25,48 @@ public class BlockNQSand extends BlockNWater
         setBlockName("nqsand");
     }
 
+    @Override
     public void updateTick(World world, int i, int j, int k, Random random)
     {
         super.updateTick(world, i, j, k, random);
     }
 
+    @Override
     public int tickRate()
     {
         return 6;
     }
 
+    @Override
     public int getThreshold()
     {
         return 2;
     }
 
+    @Override
     public int getMetathresh()
     {
         return 0;
     }
 
+    @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return mod_NWater.texx[18];
     }
 
+    @Override
     public float getSurfaceMull()
     {
         return 1.0F;
     }
 
+    @Override
     public void setToStill(World world, int i, int j, int k)
     {
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
         super.onEntityCollidedWithBlock(world, i, j, k, entity);
@@ -69,6 +75,7 @@ public class BlockNQSand extends BlockNWater
         entity.motionZ = entity.motionZ * -0.69999999999999996D;
     }
 
+    @Override
     public int getStill()
     {
         return mod_NWater.nqsand_still.blockID;

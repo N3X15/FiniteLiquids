@@ -18,7 +18,7 @@ public class BlockNWater_Pressure extends BlockBase {
 
 	protected BlockNWater_Pressure(ApiController api, int j, Material material)
     {
-		super(api.getBlockID(BlockNWater_Still.class), j, material);
+		super(api.getBlockID(BlockNWater_Pressure.class), j, material);
 		blockIndexInTexture = Block.waterStill.blockIndexInTexture;
 		float f = 0.0F;
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0725F, 1.0F);

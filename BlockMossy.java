@@ -16,7 +16,7 @@ import net.minecraft.src.*;
 public class BlockMossy extends BlockBase {
 
 	public BlockMossy(ApiController api, int j) {
-		super(api.getBlockID(BlockMossyStone.class), j, Material.rock);
+		super(api.getBlockID(BlockMossy.class), j, Material.rock);
 		blockIndexInTexture = j;
 		setTickOnLoad(true);
 		setHardness(0.5F);

@@ -24,7 +24,7 @@ public class ItemSponge extends ItemBlock
 
     public int getIconFromDamage(int i)
     {
-        return Block.sponge.getBlockTextureFromSideAndMetadata(2, BlockSponge.func_21034_c(i));
+        return Block.sponge.getBlockTextureFromSideAndMetadata(2, NBlockSponge.func_21034_c(i));
     }
 
     public int getPlacedBlockMetadata(int i)

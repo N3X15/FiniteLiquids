@@ -6,9 +6,12 @@ package MCP.mod_finiteliquids;
 
 import java.util.Random;
 
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 import MCP.ApiController;
-import MCP.api.BlockBase;
-import net.minecraft.src.*;
 
 // Referenced classes of package net.minecraft.src:
 //            BlockNWater_Still, mod_NWater, Entity, World, 
@@ -42,17 +45,18 @@ public class BlockNQSand_Still extends BlockNWater_Still
         if(entity instanceof EntityLiving)
         {
             EntityLiving entityliving = (EntityLiving)entity;
-            // TODO: get isJumping fixed
-            /*
-            if(entityliving.isJumping)
+            if(getJumping(entityliving))
             {
                 entity.motionY = entity.motionY * 0.80000001192092896D - 0.20000000298023224D;
             }
-            */
         }
     }
 
-    public int getBlockTextureFromSide(int i)
+    private boolean getJumping(EntityLiving entityliving) {
+		return ((NEntityLiving)entityliving).getJumping();
+	}
+
+	public int getBlockTextureFromSide(int i)
     {
         return mod_NWater.texx[18];
     }

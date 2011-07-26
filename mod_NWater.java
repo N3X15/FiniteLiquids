@@ -5,6 +5,11 @@
 package MCP.mod_finiteliquids;
 
 import java.io.PrintStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
@@ -24,6 +29,8 @@ public class mod_NWater extends Mod
     public static int humidity;
     private RenderBlocks myRenderBlocks;
     private IBlockAccess myBlockAccess;
+	private static Field field_armorList;
+	private Field field_modifiers;
     public static int idBlock1;
     public static int idBlock2;
     public static int idBlock6;
@@ -105,6 +112,17 @@ public class mod_NWater extends Mod
     @Override
     public void onRegisterBlocksAndItems()
     {
+
+        try {
+        	field_modifiers = (java.lang.reflect.Field.class).getDeclaredField("modifiers");
+        	field_modifiers.setAccessible(true);
+        	field_armorList = (net.minecraft.src.RenderPlayer.class).getDeclaredFields()[3];
+        	field_modifiers.setInt(field_armorList, field_armorList.getModifiers() & 0xffffffef);
+        	field_armorList.setAccessible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
         idBlock1 = PReader.PropInt("/mods/DJoslin/FiniteLiquid.properties", "NWater_BlockID", "213");
         idBlock2 = PReader.PropInt("/mods/DJoslin/FiniteLiquid.properties", "NWater_Still_BlockID", "214");
         idBlock6 = PReader.PropInt("/mods/DJoslin/FiniteLiquid.properties", "NWater_Ocean_BlockID", "217");
@@ -186,86 +204,83 @@ public class mod_NWater extends Mod
         
         Item.bucketEmpty = (new NItemBucket(Item.bucketEmpty.shiftedIndex,0)).setIconCoord(10, 4);
         
-        // TODO: AddArmor methods not yet implemented in MCPMS.
-        /*
-        tankEmpty = (new ItemEmptyTank(api(), -1, 0, ModLoader.AddArmor("tank"), 1)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/tank_empty.png").toString())).setItemName("tankEmpty");
-        tankAir = (new ItemAirTank(api(), 0, 3, ModLoader.AddArmor("tank"), 1)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/tank_air.png").toString())).setItemName("tankAir").setMaxDamage(500).setContainerItem(tankEmpty);
-        tankWater = (new ItemWaterTank(api(), 0, ModLoader.AddArmor("tank"), 1)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/tank_water.png").toString())).setItemName("tankWater").setContainerItem(tankEmpty);
-        goggles = (new ItemArmor(api(), 0, ModLoader.AddArmor("tank"), 0)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/goggles.png").toString())).setItemName("goggles");
-        */
-        chickenCooked = (new ItemChickenBoiled(api(), 3, true)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/cookedchicken.png").toString())).setItemName("chickenCooked");
-        beefCooked = (new ItemBeefBoiled(api(), 8, true)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/cookedbeef.png").toString())).setItemName("beefCooked");
+        tankEmpty = (new ItemEmptyTank(api(), -1, 0, addArmor("tank"), 1)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/tank_empty.png").toString())).setItemName("tankEmpty");
+        tankAir = (new ItemAirTank(api(), 0, 3, addArmor("tank"), 1)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/tank_air.png").toString())).setItemName("tankAir").setContainerItem(tankEmpty);
+        tankWater = (new ItemWaterTank(api(),nwater_pressure.blockID, 0, addArmor("tank"), 1)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/tank_water.png").toString())).setItemName("tankWater").setContainerItem(tankEmpty);
+        goggles = (new ItemGoggles(api(), 0, addArmor("tank"), 0)).setIconIndex(ModLoader.addOverride("/gui/items.png", (new StringBuilder()).append("/imgz/goggles.png").toString())).setItemName("goggles");
+        
+        chickenCooked = (new ItemChickenBoiled(api(), 3, true));
+        chickenCooked=chickenCooked.setIconIndex(api().registerItemIcon("/imgz/cookedchicken.png",chickenCooked.shiftedIndex)).setItemName("chickenCooked");
+        beefCooked = (new ItemBeefBoiled(api(), 8, true));
+        beefCooked=beefCooked.setIconIndex(api().registerItemIcon("/imgz/cookedbeef.png",beefCooked.shiftedIndex)).setItemName("beefCooked");
         
         Item.itemsList[Block.sponge.blockID] = (new ItemSponge(Block.sponge.blockID - 256)).setItemName("sponge");
+
+        id = 5000;
+        id2 = 5002;
         
-        /*
-        ModLoader.AddName(nwater, "New Water");
-        ModLoader.AddName(nwater_still, "New Water (still)");
-        ModLoader.AddName(nwater_ocean, "New Water (ocean)");
-        ModLoader.AddName(nwater_pressure, "New Water (pressure)");
-        
-        ModLoader.AddName(nlava, "New Lava");
-        
-        ModLoader.AddName(nlava_still, "New Lava (still)");
-        
-        ModLoader.AddName(noil, "Oil");
-        
-        ModLoader.AddName(noil_still, "Oil (still)");
-        
-        ModLoader.AddName(nqsand, "QuickSand");
-        
-        ModLoader.AddName(nqsand_still, "QuickSand (still)");
-        
-        ModLoader.AddName(bucketNWater, "Water Bucket");
-        ModLoader.AddName(bucketNLava, "Lava Bucket");
-        ModLoader.AddName(bucketNOil, "Oil Bucket");
-        ModLoader.AddName(bucketNQSand, "Quicksand Bucket");
-        ModLoader.AddName(tankEmpty, "Empty Tank");
-        ModLoader.AddName(tankWater, "Compressed Water Tank");
-        ModLoader.AddName(tankAir, "Compressed Air Tank");
-        ModLoader.AddName(goggles, "Scuba Goggles");
-        //id = ModLoader.getUniqueBlockModelID(this, true);
-        //id2 = ModLoader.getUniqueBlockModelID(this, true);
-        ModLoader.AddName(pipe, "Pipe");
-        
-        ModLoader.AddName(pump, "Pump");
-        
-        ModLoader.AddName(liquidsensor, "Liquid Sensor");
-        
-        ModLoader.AddName(liquidcompressor, "Compressor");
-        
-        ModLoader.AddName(grate, "Grate");
-        
-        ModLoader.AddName(mossyCobble, "Cobble Moss Spore");
-        
-        ModLoader.AddName(mossyStone, "Stone Moss Spore");
-        ModLoader.AddName(chickenCooked, "Cooked Chicken");
-        ModLoader.AddName(beefCooked, "Cooked Beef");*/
-        ModLoader.AddRecipe(new ItemStack(pipe, 8), new Object[] {
+        addRecipe(new ItemStack(pipe, 8), new Object[] {
             " I ", "I I", " I ", Character.valueOf('I'), Item.ingotIron
         });
-        ModLoader.AddRecipe(new ItemStack(goggles, 1), new Object[] {
+        addRecipe(new ItemStack(goggles, 1), new Object[] {
             "III", "IGI", "I I", Character.valueOf('I'), Item.ingotIron, Character.valueOf('G'), Block.glass
         });
-        ModLoader.AddRecipe(new ItemStack(tankEmpty, 1), new Object[] {
+        addRecipe(new ItemStack(tankEmpty, 1), new Object[] {
             " I ", " I ", " I ", Character.valueOf('I'), Item.ingotIron
         });
-        ModLoader.AddRecipe(new ItemStack(pump, 2), new Object[] {
+        addRecipe(new ItemStack(pump, 2), new Object[] {
             " I ", "IFI", " I ", Character.valueOf('I'), Item.ingotIron, Character.valueOf('F'), Block.stoneOvenIdle
         });
-        ModLoader.AddRecipe(new ItemStack(grate, 6), new Object[] {
+        addRecipe(new ItemStack(grate, 6), new Object[] {
             "I I", " I ", "I I", Character.valueOf('I'), Item.ingotIron
         });
-        ModLoader.AddRecipe(new ItemStack(liquidcompressor, 2), new Object[] {
+        addRecipe(new ItemStack(liquidcompressor, 2), new Object[] {
             "I I", " F ", "I I", Character.valueOf('I'), Item.ingotIron, Character.valueOf('F'), Block.stoneOvenIdle
         });
-        ModLoader.AddRecipe(new ItemStack(liquidsensor, 4), new Object[] {
+        addRecipe(new ItemStack(liquidsensor, 4), new Object[] {
             "I I", " R ", "I I", Character.valueOf('I'), Item.ingotIron, Character.valueOf('R'), Item.redstone
         });
-        ModLoader.AddRecipe(new ItemStack(mossyCobble, 3), new Object[] {
+        addRecipe(new ItemStack(mossyCobble, 3), new Object[] {
             "   ", "CMC", "   ", Character.valueOf('C'), Block.cobblestone, Character.valueOf('M'), Block.cobblestoneMossy
         });
-        //ModLoader.SetInGameHook(this, true, false);
+    }
+    
+    private void addRecipe(ItemStack itemStack, Object[] objects) {
+    	try {
+	    	Method m = CraftingManager.class.getMethod("a", ItemStack.class, Object[].class);
+	    	m.setAccessible(true);
+	    	m.invoke(CraftingManager.getInstance(), itemStack, objects);
+    	}
+    	catch(Exception e) {
+    		System.out.println("[mod_NWater] Failed to add recipe: "+e.toString());
+    	}
+        //CraftingManager.getInstance().addRecipe(itemStack, objects);
+	}
+
+
+	public static int addArmor(String s)
+    {
+        try
+        {
+            String as[] = (String[])field_armorList.get(null);
+            List list = Arrays.asList(as);
+            ArrayList arraylist = new ArrayList();
+            arraylist.addAll(list);
+            if(!arraylist.contains(s))
+            {
+                arraylist.add(s);
+            }
+            int i = arraylist.indexOf(s);
+            field_armorList.set(null, ((Object) (arraylist.toArray(new String[0]))));
+            return i;
+        }
+        catch(IllegalArgumentException illegalargumentexception)
+        {
+        } catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return -1;
     }
 
     public static boolean chunkPass(World world, int i, int j, int k)
@@ -1827,7 +1842,7 @@ public class mod_NWater extends Mod
 
     public static boolean checkGoggles(EntityPlayer entityplayer)
     {
-        return entityplayer != null && entityplayer.inventory.armorItemInSlot(3) != null && entityplayer.inventory.armorItemInSlot(3).getItem() != null && entityplayer.inventory.armorItemInSlot(3).getItem().shiftedIndex == goggles.shiftedIndex;
+    	return entityplayer != null && entityplayer.inventory.armorItemInSlot(3) != null && entityplayer.inventory.armorItemInSlot(3).getItem() != null && entityplayer.inventory.armorItemInSlot(3).getItem().shiftedIndex == goggles.shiftedIndex;
     }
 
     public static boolean canBlockBePlacedAt(World world, int i, int j, int k, int l, boolean flag)
@@ -1882,28 +1897,24 @@ public class mod_NWater extends Mod
 
 	@Override
 	public String getModAuthor() {
-		// TODO Auto-generated method stub
 		return "djoslin";
 	}
 
 
 	@Override
 	public String getModName() {
-		// TODO Auto-generated method stub
 		return "FiniteLiquids";
 	}
 
 
 	@Override
 	public String getModSystemVersion() {
-		// TODO Auto-generated method stub
 		return "1.7.0";
 	}
 
 
 	@Override
 	public String getModVersion() {
-		// TODO Auto-generated method stub
 		return "3.0.N3X.1";
 	}
 }

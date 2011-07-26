@@ -66,6 +66,8 @@ public class ItemEmptyTank extends ItemArmor
                 {
                     if(world.getBlockId(i, j, k) == mod_NWater.liquidcompressor.blockID)
                     {
+                    	/*
+                    	 * TODO: Fixme
                         if(world.getBlockMetadata(i, j, k) == 7)
                         {
                             world.setBlockMetadataWithNotify(i, j, k, 0);
@@ -76,6 +78,7 @@ public class ItemEmptyTank extends ItemArmor
                             world.setBlockMetadataWithNotify(i, j, k, 0);
                             return new ItemStack(mod_NWater.tankAir);
                         }
+                        */
                     }
                     return itemstack;
                 }
@@ -103,11 +106,12 @@ public class ItemEmptyTank extends ItemArmor
                 {
                     i++;
                 }
+                /* TODO: FIXME
                 if(world.isAirBlock(i, j, k) || !world.getBlockMaterial(i, j, k).isSolid())
                 {
                     world.setBlockAndMetadataWithNotify(i, j, k, isFull, 15);
                     return new ItemStack(mod_NWater.tankEmpty);
-                }
+                }*/
             }
         }
         return itemstack;

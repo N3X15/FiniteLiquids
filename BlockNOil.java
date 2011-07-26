@@ -6,9 +6,10 @@ package MCP.mod_finiteliquids;
 
 import java.util.Random;
 
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 import MCP.ApiController;
-import MCP.api.BlockBase;
-import net.minecraft.src.*;
 
 // Referenced classes of package net.minecraft.src:
 //            BlockNWater, mod_NWater, Block, Material, 

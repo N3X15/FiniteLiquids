@@ -4,12 +4,14 @@
 
 package MCP.mod_finiteliquids;
 
-import java.util.List;
 import java.util.Random;
 
+import net.minecraft.src.Block;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 import MCP.ApiController;
 import MCP.api.BlockBase;
-import net.minecraft.src.*;
 
 // Referenced classes of package net.minecraft.src:
 //            Block, Material, IBlockAccess, mod_NWater, 
@@ -102,8 +104,6 @@ public class BlockLiquidSensor extends BlockBase {
 			int k) {
 		boolean flag = world.getBlockMetadata(i, j, k) == 1;
 		boolean flag1 = false;
-		float f = 0.125F;
-		Object obj = null;
 		flag1 = checkLiq(world, i, j, k);
 		if (flag1 && !flag) {
 			world.setBlockMetadataWithNotify(i, j, k, 1);

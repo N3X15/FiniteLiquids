@@ -1941,7 +1941,7 @@ public class mod_NWater extends Mod
 
 	@Override
 	public String getModSystemVersion() {
-		return "1.7.0";
+		return "1.7.1";
 	}
 
 
